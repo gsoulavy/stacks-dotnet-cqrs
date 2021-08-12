@@ -155,11 +155,11 @@ steps:
 
   # Build functional tests
   - ${{ if eq(parameters.functional_test, true) }}:
-    - task: DotNetCoreCLI@2
-      displayName: Build Functional Tests
-      inputs:
-        command: build
-        arguments: -o ${{ parameters.functional_test_path }} src/api/tests/Functional
+      - task: DotNetCoreCLI@2
+        displayName: Build Functional Tests
+        inputs:
+          command: build
+          arguments: -o ${{ parameters.functional_test_path }} src/api/tests/Functional
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
