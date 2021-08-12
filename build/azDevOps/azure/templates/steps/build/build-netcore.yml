@@ -161,7 +161,7 @@ steps:
         inputs:
           command: build
           arguments: -o ${{ parameters.functional_test_path }}
-          workingDirectory: $(Build.SourcesDirectory)/src/api/tests/Functional
+          workingDirectory: $(Build.SourcesDirectory)/src/tests/Functional
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
