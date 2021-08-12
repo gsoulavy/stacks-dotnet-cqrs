@@ -154,25 +154,14 @@ steps:
           docker_imagetag: ${{ parameters.docker_imagetag }}
           docker_containerregistryname: ${{ parameters.docker_containerregistryname }}
 
-  - bash: which dotnet
-
-  - task: UseDotNet@2
-    displayName: 'Use .NET Core SDK ${{ parameters.dotnet_core_version }}'
-    inputs:
-      packageType: sdk
-      version: ${{ parameters.dotnet_core_version }}
-      installationPath: $(Agent.ToolsDirectory)/dotnet
-
-  - bash: which dotnet
-
   # Build functional tests
   - ${{ if eq(parameters.functional_test, true) }}:
       - task: DotNetCoreCLI@2
         displayName: Build Functional Tests
+        workingDirectory: src/api/tests/Functional
         inputs:
           command: build
           arguments: -o ${{ parameters.functional_test_path }}
-          workingDirectory: src/api/tests/Functional
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
