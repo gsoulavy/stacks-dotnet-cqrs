@@ -193,6 +193,7 @@ stages:
                 BROKER_URL: $(PACT_BROKER)
               }
               test_arguments: "-v q /p:CollectCoverage=true /p:CoverletOutputFormat=opencover"
+              functional_test_artefact: tests
               project_root_dir: $(Pipeline.Workspace)/s/$(self_repo)/$(self_repo_src)
 
   - stage: Dev
