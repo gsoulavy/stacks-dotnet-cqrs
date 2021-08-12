@@ -27,6 +27,7 @@ parameters:
   contract_test: false
   contract_test_env: {}
   test_arguments: ""
+  functional_test: false
   functional_test_path: $(Build.SourcesDirectory)/output/functional_tests
   functional_test_artefact: ""
 
