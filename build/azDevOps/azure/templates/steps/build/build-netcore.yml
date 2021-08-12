@@ -160,7 +160,8 @@ steps:
         displayName: Build Functional Tests
         inputs:
           command: build
-          arguments: -o ${{ parameters.functional_test_path }} src/api/tests/Functional
+          arguments: -o ${{ parameters.functional_test_path }}
+          workingDirectory: src/api/tests/Functional
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
