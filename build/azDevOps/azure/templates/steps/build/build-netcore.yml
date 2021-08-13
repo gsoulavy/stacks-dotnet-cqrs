@@ -27,6 +27,7 @@ parameters:
   contract_test: false
   contract_test_env: {}
   test_arguments: ""
+  repo_name: ""
   functional_test: false
   functional_test_path: $(Build.SourcesDirectory)/output/functional_tests
   functional_test_artefact: ""
@@ -154,16 +155,14 @@ steps:
           docker_imagetag: ${{ parameters.docker_imagetag }}
           docker_containerregistryname: ${{ parameters.docker_containerregistryname }}
 
-  - bash: ls -l $(Build.SourcesDirectory)/
-  - bash: ls -l $(Build.SourcesDirectory)/src
-
   # Build functional tests
   - ${{ if eq(parameters.functional_test, true) }}:
       - task: DotNetCoreCLI@2
         displayName: Build Functional Tests
         inputs:
           command: build
-          arguments: -o ${{ parameters.functional_test_path }} $(Build.SourcesDirectory)/src/tests/Functional/xxAMIDOxx.xxSTACKSxx.API.FunctionalTests.sln
+          arguments: -o ${{ parameters.functional_test_path }}
+          workingDir: $(Build.SourcesDirectory)/$(repo_name)/src/tests/Functional
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
