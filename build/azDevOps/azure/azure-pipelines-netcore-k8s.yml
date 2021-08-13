@@ -369,7 +369,7 @@ stages:
                     scripts_dir: $(Agent.BuildDirectory)/s/stacks-pipeline-templates/azDevOps/azure/templates/v2/scripts
                     test_artefact: "tests"
                     test_baseurl: ""
-                    functional_test: false
+                    functional_test: true
                     performance_test: false
                     smoke_test: false
                     # Kubernetes Config
@@ -387,6 +387,22 @@ stages:
                     azure_client_secret: $(ARM_CLIENT_SECRET)
                     azure_tenant_id: $(ARM_TENANT_ID)
                     azure_subscription_id: $(ARM_SUBSCRIPTION_ID)
+
+                # Run the functional tests
+                # download the artefacts
+                - task: DownloadPipelineArtifact@2
+                  displayName: Download Functional Tests
+                  inputs:
+                    artifact: 'tests'
+                    path: $(Pipeline.Workspace)/tests
+
+                - task: DotNetCoreCLI@2
+                  displayName: "Test: Run Functional Tests"
+                  inputs:
+                    command: test
+                    testRunTitle: "Functional Tests"
+                    projects: $(Pipeline.Workspace)/tests
+                    arguments: "-v n"
 
   - stage: Prod
     dependsOn: Build

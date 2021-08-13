@@ -155,19 +155,16 @@ steps:
           docker_imagetag: ${{ parameters.docker_imagetag }}
           docker_containerregistryname: ${{ parameters.docker_containerregistryname }}
 
-  # Build functional tests
+  # Build and push functional tests
   - ${{ if eq(parameters.functional_test, true) }}:
       - task: DotNetCoreCLI@2
         displayName: Build Functional Tests
         inputs:
           command: build
-          arguments: -o ${{ parameters.functional_test_path }}
           workingDirectory: $(Build.SourcesDirectory)/${{ parameters.repo_name }}/src/tests/Functional
 
-  # Publish Artefacts if required
-  - ${{ if eq(parameters.functional_test, true) }}:
       - task: PublishPipelineArtifact@1
         displayName: "Publish: Functional Tests Artifact"
         inputs:
-          path: "${{ parameters.functional_test_path }}"
+          path: "$(Build.SourcesDirectory)/${{ parameters.repo_name }}/src/tests/Functional"
           artifact: "${{ parameters.functional_test_artefact }}"
