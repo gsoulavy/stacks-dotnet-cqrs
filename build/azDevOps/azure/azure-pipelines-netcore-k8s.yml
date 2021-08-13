@@ -313,6 +313,8 @@ stages:
             value: $[ dependencies.AppInfraDev.outputs['AppInfraDev.tfoutputs.app_insights_instrumentation_key'] ]
           - name: namespace
             value: "$(Environment.ShortName)-${{ variables.domain }}"
+          - name: BASEURL
+            value: http://test.url
         strategy:
           runOnce:
             deploy:
