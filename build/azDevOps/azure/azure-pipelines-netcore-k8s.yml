@@ -26,8 +26,7 @@ resources:
     - repository: templates
       type: github
       name: amido/stacks-pipeline-templates
-      ref: 6ec2b2c612f625f812ba81cfb3a9026b818f7524
-      # refs/tags/v2.0.1
+      ref: refs/tags/v2.0.2
       # EXCHANGE THIS FOR YOUR OWN ENDPOINT CONNECTION TO GITHUB
       # REPOSITORY IS PUBLIC
       endpoint: amidostacks
@@ -393,7 +392,7 @@ stages:
 
   - stage: Prod
     dependsOn: Build
-    # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     variables:
       - group: amido-stacks-infra-credentials-prod
       - group: stacks-credentials-prod-kv
