@@ -160,7 +160,7 @@ steps:
         displayName: Build Functional Tests
         inputs:
           command: build
-          arguments: -o ${{ parameters.functional_test_path }} $(Build.SourcesDirectory)/src/tests/Functional
+          arguments: -o ${{ parameters.functional_test_path }} $(Build.SourcesDirectory)/src/tests/Functional/xxAMIDOxx.xxSTACKSxx.API.FunctionalTests.sln
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
