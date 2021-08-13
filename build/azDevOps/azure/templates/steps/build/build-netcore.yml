@@ -154,7 +154,8 @@ steps:
           docker_imagetag: ${{ parameters.docker_imagetag }}
           docker_containerregistryname: ${{ parameters.docker_containerregistryname }}
 
-  - bash: ls -l $(Build.SourcesDirectory)/src/tests/Functional
+  - bash: ls -l $(Build.SourcesDirectory)/
+  - bash: ls -l $(Build.SourcesDirectory)/src
 
   # Build functional tests
   - ${{ if eq(parameters.functional_test, true) }}:
