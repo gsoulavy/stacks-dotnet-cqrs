@@ -161,7 +161,8 @@ steps:
         displayName: Build Functional Tests
         inputs:
           command: build
-          arguments: -o ${{ parameters.functional_test_path }} $(Build.SourcesDirectory)/$(repo_name)/src/tests/Functional
+          arguments: -o ${{ parameters.functional_test_path }}
+          workingDirectory: $(Build.SourcesDirectory)/${{ parameters.repo_name }}/src/tests/Functional
 
   # Publish Artefacts if required
   - ${{ if eq(parameters.functional_test, true) }}:
