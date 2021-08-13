@@ -393,7 +393,7 @@ stages:
 
   - stage: Prod
     dependsOn: Build
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     variables:
       - group: amido-stacks-infra-credentials-prod
       - group: stacks-credentials-prod-kv
@@ -545,6 +545,8 @@ stages:
             value: $[ dependencies.AppInfraProd.outputs['AppInfraProd.tfoutputs.app_insights_instrumentation_key'] ]
           - name: namespace
             value: "$(Environment.ShortName)-${{ variables.domain }}"
+          - name: BASEURL
+            value: "https://$(Environment.ShortName)-$(domain).$(base_domain_nonprod)/api/menu/"
         strategy:
           runOnce:
             deploy:
@@ -602,7 +604,7 @@ stages:
                     scripts_dir: $(Agent.BuildDirectory)/s/stacks-pipeline-templates/azDevOps/azure/templates/v2/scripts
                     test_artefact: "tests"
                     test_baseurl: ""
-                    functional_test: false
+                    functional_test: true
                     performance_test: false
                     smoke_test: false
                     # Kubernetes Config
