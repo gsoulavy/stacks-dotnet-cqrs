@@ -546,7 +546,7 @@ stages:
           - name: namespace
             value: "$(Environment.ShortName)-${{ variables.domain }}"
           - name: BASEURL
-            value: "https://$(Environment.ShortName)-$(domain).$(base_domain_nonprod)/api/menu/"
+            value: "https://$(Environment.ShortName)-$(domain).$(base_domain_prod)/api/menu/"
         strategy:
           runOnce:
             deploy:
