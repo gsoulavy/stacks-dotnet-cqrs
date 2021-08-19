@@ -10,7 +10,7 @@ steps:
     displayName: Create Packages
     inputs:
       targetType: "inline"
-      workingDirectory: $(root_src_dir)
+      workingDirectory: ${{ parameters.root_src_dir }}
       script: |
         cp $REPO_NAME/template.csproj
         mkdir ./templates
@@ -28,11 +28,11 @@ steps:
         dotent pack -p:PackageVersion=${BUILD_BUILDNUMBER} -o output/packages
     env:
       ROOT_SRC_DIR: $(Agent.BuildDirectory)/s
-      REPO_NAME: $(self_repo)
+      REPO_NAME: ${{ parameters.repo_name }}
 
   # Upload the packages as artifacts
   - task: PublishPipelineArtifact@1
     displayName: "Publish: NuGet Packages"
     inputs:
-      path: $(root_src_dir)/output/packages
+      path: ${{ parameters.root_src_dir }}/output/packages
       artifact: packages
