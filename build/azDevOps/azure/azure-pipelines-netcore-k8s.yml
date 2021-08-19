@@ -623,6 +623,7 @@ stages:
                     azure_subscription_id: $(ARM_SUBSCRIPTION_ID)
 
   - stage: Release
+    condition: not(failed('Build')
     jobs:
       - job: CreatePackages
         pool:
