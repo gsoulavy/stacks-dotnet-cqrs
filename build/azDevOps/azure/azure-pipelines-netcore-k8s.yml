@@ -633,4 +633,3 @@ stages:
           - template: templates/steps/build/build-and-release-packages.yml
             parameters:
               root_src_dir: $(Agent.BuildDirectory)/s
-                    
