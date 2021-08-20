@@ -22,7 +22,6 @@ steps:
       targetType: "inline"
       workingDirectory: ${{ parameters.root_src_dir }}
       script: |
-        ls -l
         cp $REPO_NAME/template.csproj .
         mkdir ./templates
         pushd templates
@@ -32,9 +31,9 @@ steps:
 
         # Clean up the copy to remove git and terraform files
         pushd ${ROOT_SRC_DIR}/${REPO_NAME}
-        ls -l
+        ls -la
         rm -rf .git .github .terraform
-        ls -l 
+        ls -l a
         popd
 
         # Perform the packing of the templates
