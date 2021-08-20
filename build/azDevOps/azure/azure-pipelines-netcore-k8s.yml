@@ -134,7 +134,7 @@ stages:
 
             env:
               ROOT_SRC_DIR: $(Agent.BuildDirectory)/s
-              REPO_NAME: ${{ parameters.repo_name }}       
+              REPO_NAME: $(self_repo)
 
           # Call template to build the package from the templates dir
           - template: azDevOps/azure/templates/v2/steps/build-dotnet-package.yml@templates
