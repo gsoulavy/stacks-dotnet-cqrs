@@ -4,6 +4,7 @@ parameters:
   root_src_dir: ""
   repo_name: stacks-dotnet-cqrs
   dotnet_core_version: "3.1.x"
+  package_version: ""
 
 steps:
 
@@ -35,10 +36,11 @@ steps:
         popd
 
         # Perform the packing of the templates
-        dotnet pack -p:PackageVersion=${BUILD_BUILDNUMBER} -o output/packages
+        dotnet pack -p:PackageVersion=${VERSION} -o output/packages
     env:
       ROOT_SRC_DIR: $(Agent.BuildDirectory)/s
       REPO_NAME: ${{ parameters.repo_name }}
+      VERSION: ${{ parameters.package_version }}
 
   # Upload the packages as artifacts
   - task: PublishPipelineArtifact@1
