@@ -142,19 +142,11 @@ stages:
               package_path: $(Agent.BuildDirectory)/s
               dotnet_core_version: 3.1.x
 
-          - task: Bash@3
-            inputs:
-              targetType: "inline"
-              workingDirectory: $(Agent.BuildDirectory)/a
-              script: |
-                ls -l
-                find . -name *.nupkg
-
           # Upload the packages as artefacts
           - task: PublishPipelineArtifact@1
             displayName: Publish Templates
             inputs:
-              path: $(Agent.BuildDirectory)/s/bin/Release
+              path: $(Agent.BuildDirectory)/a
               artifact: packages
 
           # Call the template to create the packages
