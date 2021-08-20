@@ -32,7 +32,9 @@ steps:
 
         # Clean up the copy to remove git and terraform files
         pushd ${ROOT_SRC_DIR}/${REPO_NAME}
+        ls -l
         rm -rf .git .github .terraform
+        ls -l 
         popd
 
         # Perform the packing of the templates
