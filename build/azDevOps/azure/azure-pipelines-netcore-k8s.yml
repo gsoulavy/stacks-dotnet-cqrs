@@ -137,10 +137,17 @@ stages:
               REPO_NAME: $(self_repo)
 
           # Call template to build the package from the templates dir
-          - template: azDevOps/azure/templates/v2/steps/build-dotnet-package.yml@templates
+          - template: azDevOps/azure/templates/v2/steps/build-pack-test-dotnet.yml@templates
             parameters:
               package_path: $(Agent.BuildDirectory)/s
               dotnet_core_version: 3.1.x
+
+          # Upload the packages as artefacts
+          - task: PublishPipelineArtifact@1
+            display: Publish Templates
+            inputs:
+              path: $(Agent.BuildDirectory)/s/$(self_repo)/bin/Release
+              artifact: packages
 
           # Call the template to create the packages
           #- template: templates/steps/build/build-and-release-packages.yml
