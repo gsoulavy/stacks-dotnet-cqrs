@@ -22,7 +22,7 @@ steps:
       workingDirectory: ${{ parameters.root_src_dir }}
       script: |
         ls -l
-        cp $REPO_NAME/template.csproj
+        cp $REPO_NAME/template.csproj .
         mkdir ./templates
         pushd templates
         cp -r ${ROOT_SRC_DIR}/$REPO_NAME .
