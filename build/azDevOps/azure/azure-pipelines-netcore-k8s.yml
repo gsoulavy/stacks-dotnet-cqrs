@@ -144,7 +144,7 @@ stages:
 
           # Upload the packages as artefacts
           - task: PublishPipelineArtifact@1
-            display: Publish Templates
+            displayName: Publish Templates
             inputs:
               path: $(Agent.BuildDirectory)/s/$(self_repo)/bin/Release
               artifact: packages
