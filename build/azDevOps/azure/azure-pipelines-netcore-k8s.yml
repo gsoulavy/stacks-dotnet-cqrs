@@ -668,12 +668,22 @@ stages:
         steps:
           # Check out the repo so that it can be tagged
           - checkout: self
+            persistCredentials: true
 
           # Download the artefacts from the build to create the release from
           - task: DownloadPipelineArtifact@2
             inputs:
               artifact: 'packages'
               path: $(System.DefaultWorkingDirectory)/packages
+
+          # Create a tag in the code for this release
+          - task: Bash@3
+            displayName: Tag Code
+            inputs:
+              targetType: "inline"
+              script: |
+                git tag -a v${BUILD_BUILDNUMBER} -m "Release created by Azure DevOps"
+                git push origin v${BUILD_BUILDNUMBER}
 
           # Create a GitHub release with these packages
           - task: GitHubRelease@0
