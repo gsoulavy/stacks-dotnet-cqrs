@@ -146,7 +146,7 @@ stages:
           - task: PublishPipelineArtifact@1
             displayName: Publish Templates
             inputs:
-              path: $(Agent.BuildDirectory)/s/$(self_repo)/bin/Release
+              path: $(Agent.BuildDirectory)/s/bin/Release
               artifact: packages
 
           # Call the template to create the packages
