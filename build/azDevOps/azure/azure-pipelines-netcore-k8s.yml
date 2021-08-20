@@ -105,76 +105,6 @@ variables:
   github_org: $(company)
 
 stages:
-  - stage: Release
-    jobs:
-      - job: CreatePackages
-        pool:
-          vmImage: $(pool_vm_image)
-        steps:
-
-          - checkout: self
-
-          - checkout: templates
-
-          # Updates the build number in Azure DevOps (requires refresh in the UI to see)
-          - bash: |
-              echo '##vso[build.updatebuildnumber]${{ variables.docker_image_tag }}'
-            displayName: 'Update: Build Number'          
-
-          # Copy the files into the correct place for packaging
-          - task: Bash@3
-            displayName: Prepare for Packaging
-            inputs:
-              targetType: "inline"
-              workingDirectory: $(Agent.BuildDirectory)/s
-              script: |
-                cp $REPO_NAME/template.csproj .
-                mkdir ./templates
-                pushd templates
-                cp -r ${ROOT_SRC_DIR}/$REPO_NAME .
-                cp -r ${ROOT_SRC_DIR}/$REPO_NAME/src/api .
-                popd
-
-            env:
-              ROOT_SRC_DIR: $(Agent.BuildDirectory)/s
-              REPO_NAME: $(self_repo)
-
-          # Call template to build the package from the templates dir
-          - template: azDevOps/azure/templates/v2/steps/build-pack-test-dotnet.yml@templates
-            parameters:
-              package_path: $(Agent.BuildDirectory)/s
-              dotnet_core_version: 3.1.x
-
-          # Upload the packages as artefacts
-          - task: PublishPipelineArtifact@1
-            displayName: Publish Templates
-            inputs:
-              path: $(Agent.BuildDirectory)/a
-              artifact: packages
-
-          # Tag the code with the build number to create a snapshot which can
-          # be cloned
-          - task: Bash@3
-            displayName: Tag Code
-            inputs:
-              targetType: "inline"
-              workingDirectory: $(Agent.BuildDirectory)/s/$(self_repo)
-              script: |
-                git config --global user.email "russell.seymour@turtlesystems.co.uk"
-                git config --global user.name "russellseymour"
-                git tag -a v${BUILD_BUILDNUMBER} -m "Release created by Azure DevOps"
-                git push --tags
-
-          # # Create a GitHub release with the packages
-          # - task: GitHubRelease@0
-          #   displayName: Create GitHub Release
-          #   inputs:
-          #     gitHubConnection: $(github_release_service_connection)
-          #     repositoryName: $(github_org)/$(self_repo)
-          #     tag: $(Build.BuildNumber)
-          #     assets: |
-          #       $(Agent.BuildDirectory)/a/*.nupkg
-
   - stage: Build
     variables:
       - group: amido-stacks-infra-credentials-nonprod
@@ -270,6 +200,37 @@ stages:
               functional_test_artefact: tests
               repo_name: $(self_repo)
               project_root_dir: $(Pipeline.Workspace)/s/$(self_repo)/$(self_repo_src)
+
+          # Copy the files into the correct place for packaging
+          - task: Bash@3
+            displayName: Prepare for Packaging
+            inputs:
+              targetType: "inline"
+              workingDirectory: $(Agent.BuildDirectory)/s
+              script: |
+                cp $REPO_NAME/template.csproj .
+                mkdir ./templates
+                pushd templates
+                cp -r ${ROOT_SRC_DIR}/$REPO_NAME .
+                cp -r ${ROOT_SRC_DIR}/$REPO_NAME/src/api .
+                popd
+
+            env:
+              ROOT_SRC_DIR: $(Agent.BuildDirectory)/s
+              REPO_NAME: $(self_repo)
+
+          # Call template to build the package from the templates dir
+          - template: azDevOps/azure/templates/v2/steps/build-pack-test-dotnet.yml@templates
+            parameters:
+              package_path: $(Agent.BuildDirectory)/s
+              dotnet_core_version: 3.1.x
+
+          # Upload the packages as artefacts
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Templates
+            inputs:
+              path: $(Agent.BuildDirectory)/a
+              artifact: packages
 
   - stage: Dev
     dependsOn: Build
@@ -695,3 +656,29 @@ stages:
                     azure_tenant_id: $(ARM_TENANT_ID)
                     azure_subscription_id: $(ARM_SUBSCRIPTION_ID)
 
+  - stage: Release
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    jobs:
+      - job: CreateGitHubRelease
+        pool:
+          vmImage: $(pool_vm_image)
+        steps:
+          # Check out the repo so that it can be tagged
+          - checkout: self
+
+          # Download the artefacts from the build to create the release from
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: 'packages'
+              path: $(System.DefaultWorkingDirectory)/packages
+
+          # Create a GitHub release with these packages
+          - task: GitHubRelease@0
+            displayName: Create GitHub Release
+            inputs:
+              gitHubConnection: $(github_release_service_connection)
+              repositoryName: $(github_org)/$(self_repo)
+              tag: $(Build.BuildNumber)
+              assets: |
+                $(System.DefaultWorkingDirectory)/packages/*.nupkg
