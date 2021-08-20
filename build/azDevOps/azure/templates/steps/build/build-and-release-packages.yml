@@ -35,7 +35,7 @@ steps:
         popd
 
         # Perform the packing of the templates
-        dotent pack -p:PackageVersion=${BUILD_BUILDNUMBER} -o output/packages
+        dotnet pack -p:PackageVersion=${BUILD_BUILDNUMBER} -o output/packages
     env:
       ROOT_SRC_DIR: $(Agent.BuildDirectory)/s
       REPO_NAME: ${{ parameters.repo_name }}
