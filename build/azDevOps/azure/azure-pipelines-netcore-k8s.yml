@@ -161,7 +161,7 @@ stages:
               workingDirectory: $(Agent.BuildDirectory)/s/$(self_repo)
               script: |
                 git config --global user.email "russell.seymour@turtlesystems.co.uk"
-                git config --global user.name russellseymour
+                git config --global user.name "russellseymour"
                 git tag -a v${BUILD_BUILDNUMBER} -m "Release created by Azure DevOps"
                 git push --tags
 
