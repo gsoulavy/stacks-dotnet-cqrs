@@ -100,6 +100,9 @@ variables:
   # Yamllint
   yamllint_config_file: "${{ variables.self_repo_dir }}/yamllint.conf"
   yamllint_scan_directory: "."
+  # Release
+  github_release_service_connection: GitHubReleases
+  github_org: $(company)
 
 stages:
   - stage: Release
@@ -149,11 +152,26 @@ stages:
               path: $(Agent.BuildDirectory)/a
               artifact: packages
 
-          # Call the template to create the packages
-          #- template: templates/steps/build/build-and-release-packages.yml
-          #  parameters:
-          #    root_src_dir: $(Agent.BuildDirectory)/s
-          #    package_version: $(version_major).$(version_minor).$(version_revision)
+          # Tag the code with the build number to create a snapshot which can
+          # be cloned
+          - task: Bash@3
+            displayName: Tag Code
+            inputs:
+              targetType: "inline"
+              workingDirectory: $(Agent.BuildDirectory)/s/$(self_repo)
+              script: |
+                git tag -a v${BUILD_BUILDNUMBER} -m "Release created by Azure DevOps"
+                git push --tags
+
+          # # Create a GitHub release with the packages
+          # - task: GitHubRelease@0
+          #   displayName: Create GitHub Release
+          #   inputs:
+          #     gitHubConnection: $(github_release_service_connection)
+          #     repositoryName: $(github_org)/$(self_repo)
+          #     tag: $(Build.BuildNumber)
+          #     assets: |
+          #       $(Agent.BuildDirectory)/a/*.nupkg
 
   - stage: Build
     variables:
