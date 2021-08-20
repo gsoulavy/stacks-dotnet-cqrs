@@ -29,13 +29,6 @@ steps:
         cp -r ${ROOT_SRC_DIR}/$REPO_NAME/src/api .
         popd
 
-        # Clean up the copy to remove git and terraform files
-        pushd ${ROOT_SRC_DIR}/${REPO_NAME}
-        ls -la
-        rm -rf .git .github .terraform
-        ls -la
-        popd
-
         # Perform the packing of the templates
         dotnet pack -p:PackageVersion=${VERSION} -o output/packages
     env:
