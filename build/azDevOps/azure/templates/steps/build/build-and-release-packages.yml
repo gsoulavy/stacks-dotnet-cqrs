@@ -33,7 +33,7 @@ steps:
         pushd ${ROOT_SRC_DIR}/${REPO_NAME}
         ls -la
         rm -rf .git .github .terraform
-        ls -l a
+        ls -la
         popd
 
         # Perform the packing of the templates
