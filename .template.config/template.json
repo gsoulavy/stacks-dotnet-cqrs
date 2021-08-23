@@ -50,6 +50,7 @@
 				"_rels/**",
 				"package/**",
 				"**/*.nuspec",
+				"**/[Tt]emplate.csproj",
 				"*Content_Types*.xml"
 			],
 			"rename": {
