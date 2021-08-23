@@ -101,8 +101,10 @@ variables:
   yamllint_config_file: "${{ variables.self_repo_dir }}/yamllint.conf"
   yamllint_scan_directory: "."
   # Release
+  create_release: true
   github_release_service_connection: GitHubReleases
   github_org: $(company)
+  nuget_service_connection: NuGetAmidoStacksServiceConnection
 
 stages:
   - stage: Build
@@ -660,7 +662,7 @@ stages:
     dependsOn:
       - Build
       - Prod
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['create_release'], 'true'))
     jobs:
       - job: CreateGitHubRelease
         pool:
@@ -674,7 +676,7 @@ stages:
           - task: DownloadPipelineArtifact@2
             inputs:
               artifact: 'packages'
-              path: $(System.DefaultWorkingDirectory)/packages
+              path: $(Build.ArtifactStagingDirectory)/packages
 
           # Create a tag in the code for this release
           - task: Bash@3
@@ -698,4 +700,10 @@ stages:
               repositoryName: $(github_org)/$(self_repo)
               tag: $(Build.BuildNumber)
               assets: |
-                $(System.DefaultWorkingDirectory)/packages/*.nupkg
+                $(Build.ArtifactStagingDirectory)/packages/*.nupkg
+
+          # Push the package to Nuget
+          - template: azDevOps/azure/templates/v2/steps/deploy-push-package-symbols-public.yml@templates
+            parameters:
+              use_nuget_service_connection: true
+              nuget_sevice_connection: $(nuget_service_connection)
