@@ -682,8 +682,13 @@ stages:
             inputs:
               targetType: "inline"
               script: |
+                git config user.name "BuildService"
+                git config user.email "builder@${COMPANY}.com"
+
                 git tag -a v${BUILD_BUILDNUMBER} -m "Release created by Azure DevOps"
                 git push origin v${BUILD_BUILDNUMBER}
+            env:
+              COMPANY: $(company)
 
           # Create a GitHub release with these packages
           - task: GitHubRelease@0
