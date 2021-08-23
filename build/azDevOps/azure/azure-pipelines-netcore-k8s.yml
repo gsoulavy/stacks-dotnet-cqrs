@@ -54,7 +54,7 @@ variables:
   self_repo_dir: "$(Agent.BuildDirectory)/s/$(self_repo)"
   self_repo_tf_src: deploy/azure/app/kube
   self_repo_tf_dir: "$(self_repo_dir)/$(self_repo_tf_src)"
-  self_generic_name: stacks-api
+  self_generic_name: stacks-api-cqrs
   self_pipeline_repo: "$(Agent.BuildDirectory)/s/stacks-pipeline-templates"
   self_pipeline_scripts_dir: "$(self_pipeline_repo)/scripts"
   # TF STATE CONFIG
