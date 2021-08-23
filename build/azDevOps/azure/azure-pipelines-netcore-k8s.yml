@@ -705,5 +705,4 @@ stages:
           # Push the package to Nuget
           - template: azDevOps/azure/templates/v2/steps/deploy-push-package-symbols-public.yml@templates
             parameters:
-              use_nuget_service_connection: true
               nuget_sevice_connection: $(nuget_service_connection)
