@@ -122,7 +122,7 @@ stages:
       - name: azure_client_secret
         value: "$(azure-client-secret)"
       - name: version_number
-        value: "$(version_major).$(version_minor).$(version_revision)"        
+        value: "$(version_major).$(version_minor).$(version_revision)"
     jobs:
       - job: AppBuild
         pool:
