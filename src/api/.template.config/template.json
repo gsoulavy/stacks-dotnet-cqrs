@@ -156,17 +156,6 @@
             },
             "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
             "continueOnError": true
-        },
-
-        {
-            "description": "Manual actions required",
-            "manualInstructions": [
-                {
-                    "text": "Check EXAMPLE.API.csproj"
-                }
-            ],
-            "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
-            "continueOnError": true
         }
     ]
 }
