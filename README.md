@@ -156,5 +156,6 @@ Rerun the command and pass --force to accept and create.
 
 This will happen if the newly generated template project names collide with your existing structure. It's up to you to decide if you want to use the `--force` flag and overwrite all collisions with the projects from the template. By doing so you might lose your custom logic in some places and you'll have to transfer things manually to the new projects by examining the diffs in your source control.
 
+If you don't want to do that you can generate the new projects with a different namespace (what was shown above) and then copy/remove the things you don't need.
 
 
