@@ -72,7 +72,7 @@ variables:
   - name: version_minor
     value: 0
   - name: version_revision
-    version: $[counter(join(variables['version_major'], join('-', variables['version_minor'])), 0)]
+    value: $[counter(join(variables['version_major'], join('-', variables['version_minor'])), 0)]
 
   # Docker Config
   - name: docker_dockerfile_path
