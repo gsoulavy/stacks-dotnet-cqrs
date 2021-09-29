@@ -4,17 +4,17 @@
     "classifications": [
         "Stacks",
         "WebAPI",
-        "CQRS",
-        "api"
+        "CQRS"
     ],
     "name": "Amido Stacks Web Api CQRS - Add to existing solution",
-    "identity": "Amido.Stacks.Add.WebApi.CQRS",
-    "sourceName": "xxAMIDOxx.xxSTACKSxx",
+    "identity": "Amido.Stacks.Add.WebApi.CQRS.CSharp",
+    "groupIdentity": "Amido.Stacks.App.WebApi",
     "shortName": "stacks-add-web-api-cqrs",
     "tags": {
         "language": "C#",
         "type": "project"
     },
+    "sourceName": "xxAMIDOxx.xxSTACKSxx",
     "symbols": {
         "domain": {
             "type": "parameter",

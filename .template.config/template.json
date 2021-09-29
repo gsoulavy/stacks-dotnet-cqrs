@@ -4,11 +4,11 @@
   "classifications": [
     "Stacks",
     "WebAPI",
-    "CQRS",
-    "api"
+    "CQRS"
   ],
   "name": "Amido Stacks Web Api CQRS - Full solution",
-  "identity": "Amido.Stacks.App.WebApi.CQRS",
+  "identity": "Amido.Stacks.App.WebApi.CQRS.CSharp",
+  "groupIdentity": "Amido.Stacks.App.WebApi.CQRS",
   "shortName": "stacks-app-web-api-cqrs",
   "tags": {
     "language": "C#",
