@@ -1,76 +1,114 @@
 {
-	"$schema": "http://json.schemastore.org/template",
-	"author": "stacks@amido.com",
-	"classifications": [
-		"Stacks",
-		"WebAPI",
-		"CQRS",
-		"api"
-	],
-	"name": "Amido Stacks Web Api CQRS - Full solution",
-	"identity": "Amido.Stacks.App.WebApi.CQRS",
-	"shortName": "stacks-app-web-api-cqrs",
-	"tags": {
-		"language": "C#",
-		"type": "project"
-	},
-	"sourceName": "xxAMIDOxx.xxSTACKSxx",
-	"preferNameDirectory": true,
-	"symbols": {
-		"domain": {
-			"type": "parameter",
-			"isRequired": true,
-			"replaces": "Menu",
-			"fileRename": "Menu",
-			"defaultValue": "DOMAIN",
-			"forms": {
-				"global": [
-					"identity",
-					"lowerCase"
-				]
-			}
-		}
-	},
-	"sources": [
-		{
-			"source": "./",
-			"include": [
-				"**/*"
-			],
-			"exclude": [
-				"**/[Bb]in/**",
-				"**/[Oo]bj/**",
-				"**/.template.config/**",
-				"**/*.filelist",
-				"**/*.user",
-				"**/*.lock.json",
-				"**/.git/**",
-				"**/.vs/**",
-				"**/.vscode/**",
-				"_rels/**",
-				"package/**",
-				"**/*.nuspec",
-				"**/[Tt]emplate.csproj",
-				"*Content_Types*.xml"
-			],
-			"rename": {
-				"_gitignore": ".gitignore",
-				"_gitattributes": ".gitattributes"
-			},
-			"modifiers": []
-		}
-	],
-	"SpecialCustomOperations": {
-		"**/*.yml": {
-			"Operations": [
-				{
-					"type": "conditional",
-					"configuration": {
-						"style": "line",
-						"token": "#"
-					}
-				}
-			]
-		}
-	}
+  "$schema": "http://json.schemastore.org/template",
+  "author": "stacks@amido.com",
+  "classifications": [
+    "Stacks",
+    "WebAPI",
+    "CQRS",
+    "api"
+  ],
+  "name": "Amido Stacks Web Api CQRS - Full solution",
+  "identity": "Amido.Stacks.App.WebApi.CQRS",
+  "shortName": "stacks-app-web-api-cqrs",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "xxAMIDOxx.xxSTACKSxx",
+  "preferNameDirectory": true,
+  "symbols": {
+    "domain": {
+      "type": "parameter",
+      "isRequired": true,
+      "replaces": "Menu",
+      "fileRename": "Menu",
+      "defaultValue": "DOMAIN",
+      "forms": {
+        "global": [
+          "identity",
+          "lowerCase"
+        ]
+      }
+    },
+    "database": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "CosmosDb",
+          "description": "Targets Azure Cosmos database for storing data."
+        },
+        {
+          "choice": "DynamoDb",
+          "description": "Targets AWS Dynamo database for storing data."
+        }
+      ],
+      "description": "Adds saving to database."
+    },
+    "CosmosDb": {
+      "type": "computed",
+      "value": "(database == \"CosmosDb\")"
+    },
+    "DynamoDb": {
+      "type": "computed",
+      "value": "(database == \"DynamoDb\")"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "include": [
+        "**/*"
+      ],
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        "**/.template.config/**",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "**/.git/**",
+        "**/.vs/**",
+        "**/.vscode/**",
+        "_rels/**",
+        "package/**",
+        "**/*.nuspec",
+        "*Content_Types*.xml"
+      ],
+      "rename": {
+        "_gitignore": ".gitignore",
+        "_gitattributes": ".gitattributes"
+      },
+      "modifiers": [
+        {
+          "condition": "(CosmosDb)",
+          "exclude": [
+            "**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure/Repositories/DynamoDbMenuRepository.cs",
+            "**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure.IntegrationTests/DynamoDbMenuRepositoryTests.cs"
+          ]
+        },
+        {
+          "condition": "(DynamoDb)",
+          "exclude": [
+            "**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure/Repositories/CosmosDbMenuRepository.cs",
+            "**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure.IntegrationTests/CosmosDbMenuRepositoryTests.cs"
+          ]
+        }
+      ]
+    }
+  ],
+
+  "SpecialCustomOperations": {
+    "**/*.yml": {
+      "Operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "style": "line",
+            "token": "#"
+          }
+        }
+      ]
+    }
+  }
 }

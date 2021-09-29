@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Amido.Stacks.Application.CQRS.ApplicationEvents;
 using Amido.Stacks.Application.CQRS.Commands;
 using Amido.Stacks.Application.CQRS.Queries;
@@ -39,22 +39,28 @@ namespace xxAMIDOxx.xxSTACKSxx.Infrastructure
         /// <param name="services"></param>
         public static void ConfigureProductionDependencies(WebHostBuilderContext context, IServiceCollection services)
         {
-            services.Configure<CosmosDbConfiguration>(context.Configuration.GetSection("CosmosDB"));
-
             services.AddSecrets();
+
+#if (CosmosDb)
+            services.Configure<CosmosDbConfiguration>(context.Configuration.GetSection("CosmosDB"));
             services.AddCosmosDB();
+            services.AddTransient<IMenuRepository, CosmosDbMenuRepository>();
+#elif (DynamoDb)
+            //services.Configure<DynamoDbConfiguration>(context.Configuration.GetSection("DynamoDb"));
+            //services.AddDynamoDB();
+            //services.AddTransient<IMenuRepository, DynamoDbMenuRepository>();
+#else
+            services.AddTransient<IMenuRepository, InMemoryMenuRepository>();
+#endif
 
             //TODO: Evaluate if event publishers should be generic, probably not, EventHandler are generic tough
             AddEventPublishers(services);
 
-            if (Environment.GetEnvironmentVariable("USE_MEMORY_STORAGE") == null)
-                services.AddTransient<IMenuRepository, MenuRepository>();
-            else
-                services.AddTransient<IMenuRepository, InMemoryMenuRepository>();
-
             var healthChecks = services.AddHealthChecks();
-            healthChecks.AddCheck<CosmosDbDocumentStorage<Menu>>("CosmosDB");
+#if (CosmosDb)
             healthChecks.AddCheck<CustomHealthCheck>("Sample");//This is a sample health check, remove if not needed, more info: https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/monitor-app-health
+            healthChecks.AddCheck<CosmosDbDocumentStorage<Menu>>("CosmosDB");
+#endif
         }
 
         private static void AddCommandHandlers(IServiceCollection services)
