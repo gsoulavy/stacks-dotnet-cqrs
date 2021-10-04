@@ -1,4 +1,10 @@
-stacks-dotnet-cqrs
+# stacks-dotnet-cqrs
+
+The full documentation on Amido Stacks can be found [here](https://amido.github.io/stacks/).
+
+Amido Stacks targets different cloud providers.
+
+[Azure](https://amido.github.io/stacks/docs/workloads/azure/backend/netcore/introduction_netcore)
 
 ### Templates
 
@@ -11,15 +17,13 @@ All templates from this repository come as part of the [Amido.Stacks.CQRS.Templa
 
 #### Template installation
 
-To install the templates on your own machine you'll need to download the [Amido.Stacks.CQRS.Templates](https://www.nuget.org/packages/Amido.Stacks.CQRS.Templates/) NuGet package.
-
-Then you can install it locally via the command line (command is given with an example version)
+For the latest template version, please consult the Nuget page [Amido.Stacks.CQRS.Events.Templates](https://www.nuget.org/packages/Amido.Stacks.CQRS.Templates/). To install the templates to your machine via the command line:
 
 ```shell
-dotnet new --install Amido.Stacks.CQRS.Templates::0.0.85
+dotnet new --install Amido.Stacks.CQRS.Templates::0.0.101
 ```
 
-The output will list all installed templates. In that list you'll see the two installed Amido Stacks templates listed above.
+The output will list all installed templates (not listed for brevity). In that list you'll see the two installed Amido Stacks templates listed above.
 
 ```shell
 Template Name                                         Short Name                       Language    Tags
@@ -40,7 +44,7 @@ Examples:
 To uninstall the template pack you have to execute the following command
 
 ```shell
-dotnet new -u Amido.Stacks.CQRS.Templates
+dotnet new --uninstall Amido.Stacks.CQRS.Templates
 ```
 
 #### Adding a CQRS template to your existing solution
@@ -124,5 +128,3 @@ Rerun the command and pass --force to accept and create.
 This will happen if the newly generated template project names collide with your existing structure. It's up to you to decide if you want to use the `--force` flag and overwrite all collisions with the projects from the template. By doing so you might lose your custom logic in some places and you'll have to transfer things manually to the new projects by examining the diffs in your source control.
 
 If you don't want to do that you can generate the new projects with a different namespace (what was shown above) and then copy/remove the things you don't need.
-
-
