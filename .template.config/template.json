@@ -6,7 +6,7 @@
     "WebAPI",
     "CQRS"
   ],
-  "name": "Amido Stacks Web Api CQRS - Full solution",
+  "name": "Amido Stacks Web API CQRS",
   "identity": "Amido.Stacks.App.WebApi.CQRS.CSharp",
   "groupIdentity": "Amido.Stacks.App.WebApi.CQRS",
   "shortName": "stacks-app-web-api-cqrs",
@@ -93,7 +93,16 @@
             "**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure/Repositories/CosmosDbMenuRepository.cs",
             "**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure.IntegrationTests/CosmosDbMenuRepositoryTests.cs"
           ]
-        }
+        },
+        {
+					"condition": "(!CosmosDb && !DynamoDb)",
+					"exclude": [
+						"**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure/Repositories/CosmosDbMenuRepository.cs",
+						"**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure.IntegrationTests/CosmosDbMenuRepositoryTests.cs",
+						"**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure/Repositories/DynamoDbMenuRepository.cs",
+						"**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure.IntegrationTests/DynamoDbMenuRepositoryTests.cs"
+					]
+				},
       ]
     }
   ],
