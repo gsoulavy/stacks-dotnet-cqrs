@@ -29,8 +29,8 @@ The output will list all installed templates (not listed for brevity). In that l
 Template Name                                         Short Name                       Language    Tags
 ----------------------------------------------------  -------------------------------  ----------  ------------------------------------------
 ...
-Amido Stacks Web API                                  stacks-add-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
-Amido Stacks Web Api CQRS - Full solution             stacks-app-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
+Amido Stacks CQRS Projects                            stacks-add-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
+Amido Stacks Web API CQRS                             stacks-app-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
 ...
 
 Examples:
