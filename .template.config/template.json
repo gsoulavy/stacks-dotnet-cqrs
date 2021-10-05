@@ -6,7 +6,7 @@
     "WebAPI",
     "CQRS"
   ],
-  "name": "Amido Stacks Web Api CQRS",
+  "name": "Amido Stacks Web API CQRS",
   "identity": "Amido.Stacks.App.WebApi.CQRS.CSharp",
   "groupIdentity": "Amido.Stacks.App.WebApi.CQRS",
   "shortName": "stacks-app-web-api-cqrs",

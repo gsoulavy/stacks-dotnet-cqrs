@@ -17,7 +17,7 @@ All templates from this repository come as part of the [Amido.Stacks.CQRS.Templa
 
 #### Template installation
 
-For the latest template version, please consult the Nuget page [Amido.Stacks.CQRS.Events.Templates](https://www.nuget.org/packages/Amido.Stacks.CQRS.Templates/). To install the templates to your machine via the command line:
+For the latest template version, please consult the Nuget page [Amido.Stacks.CQRS.Templates](https://www.nuget.org/packages/Amido.Stacks.CQRS.Templates/). To install the templates to your machine via the command line:
 
 ```shell
 dotnet new --install Amido.Stacks.CQRS.Templates::0.0.101
@@ -29,7 +29,7 @@ The output will list all installed templates (not listed for brevity). In that l
 Template Name                                         Short Name                       Language    Tags
 ----------------------------------------------------  -------------------------------  ----------  ------------------------------------------
 ...
-Amido Stacks Web Api CQRS - Add to existing solution  stacks-add-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
+Amido Stacks Web API                                  stacks-add-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
 Amido Stacks Web Api CQRS - Full solution             stacks-app-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
 ...
 
