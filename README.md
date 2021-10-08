@@ -10,8 +10,8 @@ Amido Stacks targets different cloud providers.
 
 All templates from this repository come as part of the [Amido.Stacks.CQRS.Templates](https://www.nuget.org/packages/Amido.Stacks.CQRS.Templates/) NuGet package. The list of templates inside the package are as follows:
 
-- `stacks-app-web-api-cqrs`. The full CQRS template including everything + build infrastructure.
-- `stacks-add-web-api-cqrs`. A special template that can add `CQRS` functionality and projects to your existing Web API solution
+- `stacks-cqrs-webapi`. The full CQRS template including source + build infrastructure.
+- `stacks-add-cqrs`. A special template that can add `CQRS` functionality and projects to your existing Web API solution
 
 ### Template usage
 
@@ -29,8 +29,8 @@ The output will list all installed templates (not listed for brevity). In that l
 Template Name                                         Short Name                       Language    Tags
 ----------------------------------------------------  -------------------------------  ----------  ------------------------------------------
 ...
-Amido Stacks CQRS Projects                            stacks-add-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
-Amido Stacks Web API CQRS                             stacks-app-web-api-cqrs          [C#]        Stacks/WebAPI/CQRS/api
+Amido Stacks CQRS Projects                            stacks-add-cqrs                  [C#]        Stacks/CQRS
+Amido Stacks CQRS Web API                             stacks-cqrs-webapi               [C#]        Stacks/Infrastructure/CQRS/WebAPI
 ...
 
 Examples:
@@ -56,7 +56,7 @@ In order for the template to generate correctly you'll need to execute it in the
 ```shell
 % cd src
 
-% dotnet new stacks-add-web-api-cqrs -n Foo.Bar.CQRS -d Menu
+% dotnet new stacks-add-cqrs -n Foo.Bar.CQRS -d Menu
 The template "Amido Stacks Web Api CQRS - Add to existing solution" was created successfully.
 ```
 

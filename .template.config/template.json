@@ -3,13 +3,14 @@
 	"author": "stacks@amido.com",
 	"classifications": [
 		"Stacks",
+		"Infrastructure",
 		"CQRS",
 		"WebAPI"
 	],
 	"name": "Amido Stacks CQRS Web API",
-	"identity": "Amido.Stacks.App.CQRS.WebApi.CSharp",
-	"groupIdentity": "Amido.Stacks.App.CQRS.WebApi",
-	"shortName": "stacks-app-cqrs-web-api",
+	"identity": "Amido.Stacks.CQRS.WebApi.CSharp",
+	"groupIdentity": "Amido.Stacks.CQRS.WebApi",
+	"shortName": "stacks-cqrs-webapi",
 	"tags": {
 		"language": "C#",
 		"type": "project"
