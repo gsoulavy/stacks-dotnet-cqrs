@@ -21,7 +21,6 @@
 		"domain": {
 			"type": "parameter",
 			"isRequired": true,
-			"shortName": "d",
 			"replaces": "Menu",
 			"fileRename": "Menu",
 			"defaultValue": "DOMAIN",
@@ -34,7 +33,6 @@
 		},
 		"database": {
 			"type": "parameter",
-			"shortName": "db",
 			"datatype": "choice",
 			"choices": [
 				{
