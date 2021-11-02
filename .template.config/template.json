@@ -21,6 +21,7 @@
 		"domain": {
 			"type": "parameter",
 			"isRequired": true,
+			"shortName": "d",
 			"replaces": "Menu",
 			"fileRename": "Menu",
 			"defaultValue": "DOMAIN",
@@ -33,6 +34,7 @@
 		},
 		"database": {
 			"type": "parameter",
+			"shortName": "db",
 			"datatype": "choice",
 			"choices": [
 				{
@@ -103,7 +105,7 @@
 						"**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure/Repositories/DynamoDbMenuRepository.cs",
 						"**/src/api/xxAMIDOxx.xxSTACKSxx.Infrastructure.IntegrationTests/DynamoDbMenuRepositoryTests.cs"
 					]
-				},
+				}
 			]
 		}
 	],
