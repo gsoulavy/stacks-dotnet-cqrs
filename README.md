@@ -20,7 +20,7 @@ All templates from this repository come as part of the [Amido.Stacks.CQRS.Templa
 For the latest template version, please consult the Nuget page [Amido.Stacks.CQRS.Templates](https://www.nuget.org/packages/Amido.Stacks.CQRS.Templates/). To install the templates to your machine via the command line:
 
 ```shell
-dotnet new --install Amido.Stacks.CQRS.Templates::0.0.101
+dotnet new --install Amido.Stacks.CQRS.Templates
 ```
 
 The output will list all installed templates (not listed for brevity). In that list you'll see the two installed Amido Stacks templates listed above.
@@ -45,6 +45,30 @@ To uninstall the template pack you have to execute the following command
 
 ```shell
 dotnet new --uninstall Amido.Stacks.CQRS.Templates
+```
+
+#### Important parameters
+
+- **-n|--name**
+  - Sets the project name
+  - Omitting it will result in the project name being the same as the folder where the command has been ran from
+- **-d|--domain**
+  - Sets the name of the aggregate root object. It is also the name of the collection within CosmosDB instance.
+- **-db|--database**
+  - Configures which database provider to be used.
+- **-o|--output**
+  - Sets the path to where the project is added
+  - Omitting the parameter will result in the creation of a new folder
+
+#### Creating a new WebAPI + CQRS project from the template
+
+Let's say you want to create a brand new WebAPI with CQRS for your project.
+
+It's entirely up to you where you want to generate the WebAPI. For example your company has the name structure `Foo.Bar` as a prefix to all your namespaces where `Foo` is the company name and `Bar` is the name of the project. If you want the WebAPI to have a domain `Warehouse`, use `CosmosDb` and be generated inside a folder called `new-proj-folder` you'll execute the following command:
+
+```shell
+% dotnet new stacks-cqrs-webapi -n Foo.Bar -d Warehouse -db CosmosDb -o new-proj-folder
+The template "Amido Stacks Web Api" was created successfully.
 ```
 
 #### Adding a CQRS template to your existing solution
