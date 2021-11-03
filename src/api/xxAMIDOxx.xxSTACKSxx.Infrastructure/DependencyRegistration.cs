@@ -15,7 +15,9 @@ using xxAMIDOxx.xxSTACKSxx.Application.QueryHandlers;
 using xxAMIDOxx.xxSTACKSxx.Domain;
 using xxAMIDOxx.xxSTACKSxx.Infrastructure.Fakes;
 using xxAMIDOxx.xxSTACKSxx.Infrastructure.HealthChecks;
+#if (CosmosDb || DynamoDb)
 using xxAMIDOxx.xxSTACKSxx.Infrastructure.Repositories;
+#endif
 
 namespace xxAMIDOxx.xxSTACKSxx.Infrastructure
 {
