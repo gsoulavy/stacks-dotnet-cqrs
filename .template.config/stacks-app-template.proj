@@ -12,7 +12,7 @@
     <PackProjectInputFile>$(MSBuildProjectFullPath)</PackProjectInputFile>
     <NoBuild>true</NoBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
 
   </PropertyGroup>
@@ -36,7 +36,7 @@
     </ExcludeFromPackage>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="**/*" Exclude="$(ExcludeFromPackage)" > 
+    <Content Include="**/*" Exclude="$(ExcludeFromPackage)" >
       <PackagePath>/</PackagePath>
     </Content>
   </ItemGroup>
