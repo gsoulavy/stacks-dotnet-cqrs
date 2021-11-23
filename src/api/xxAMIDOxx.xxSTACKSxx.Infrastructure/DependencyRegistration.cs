@@ -51,7 +51,7 @@ namespace xxAMIDOxx.xxSTACKSxx.Infrastructure
             //services.Configure<DynamoDbConfiguration>(context.Configuration.GetSection("DynamoDb"));
             //services.AddDynamoDB();
             //services.AddTransient<IMenuRepository, DynamoDbMenuRepository>();
-#else
+#elif (InMemoryDb)
             services.AddTransient<IMenuRepository, InMemoryMenuRepository>();
 #endif
 
