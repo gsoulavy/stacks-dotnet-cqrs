@@ -34,6 +34,7 @@
 		"database": {
 			"type": "parameter",
 			"datatype": "choice",
+			"defaultValue": "InMemoryDb",
 			"choices": [
 				{
 					"choice": "CosmosDb",
@@ -42,7 +43,11 @@
 				{
 					"choice": "DynamoDb",
 					"description": "Targets AWS Dynamo database for storing data."
-				}
+				},
+				{
+					"choice": "InMemoryDb",
+					"description": "Targets an In Memory database for storing data."
+				}			
 			],
 			"description": "Adds saving to database."
 		},
@@ -53,6 +58,10 @@
 		"DynamoDb": {
 			"type": "computed",
 			"value": "(database == \"DynamoDb\")"
+		},
+		"InMemoryDb": {
+			"type": "computed",
+			"value": "(database == \"InMemoryDb\")"
 		}
 	},
 	"sources": [

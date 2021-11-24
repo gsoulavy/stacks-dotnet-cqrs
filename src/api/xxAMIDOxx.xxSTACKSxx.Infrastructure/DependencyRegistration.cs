@@ -51,11 +51,12 @@ namespace xxAMIDOxx.xxSTACKSxx.Infrastructure
             //services.Configure<DynamoDbConfiguration>(context.Configuration.GetSection("DynamoDb"));
             //services.AddDynamoDB();
             //services.AddTransient<IMenuRepository, DynamoDbMenuRepository>();
+#elif (InMemoryDb)
+            services.AddTransient<IMenuRepository, InMemoryMenuRepository>();
 #else
             services.AddTransient<IMenuRepository, InMemoryMenuRepository>();
 #endif
 
-            //TODO: Evaluate if event publishers should be generic, probably not, EventHandler are generic tough
             AddEventPublishers(services);
 
             var healthChecks = services.AddHealthChecks();
