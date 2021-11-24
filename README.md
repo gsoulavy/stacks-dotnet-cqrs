@@ -52,7 +52,7 @@ dotnet new --uninstall Amido.Stacks.CQRS.Templates
 - **-n|--name**
   - Sets the project name
   - Omitting it will result in the project name being the same as the folder where the command has been ran from
-- **-d|--domain**
+- **-do|--domain**
   - Sets the name of the aggregate root object. It is also the name of the collection within CosmosDB instance.
 - **-db|--database**
   - Configures which database provider to be used.
@@ -67,7 +67,7 @@ Let's say you want to create a brand new WebAPI with CQRS for your project.
 It's entirely up to you where you want to generate the WebAPI. For example your company has the name structure `Foo.Bar` as a prefix to all your namespaces where `Foo` is the company name and `Bar` is the name of the project. If you want the WebAPI to have a domain `Warehouse`, use `CosmosDb` and be generated inside a folder called `new-proj-folder` you'll execute the following command:
 
 ```shell
-% dotnet new stacks-cqrs-webapi -n Foo.Bar -d Warehouse -db CosmosDb -o new-proj-folder
+% dotnet new stacks-cqrs-webapi -n Foo.Bar -do Warehouse -db CosmosDb -o new-proj-folder
 The template "Amido Stacks Web Api" was created successfully.
 ```
 
@@ -80,7 +80,7 @@ In order for the template to generate correctly you'll need to execute it in the
 ```shell
 % cd src
 
-% dotnet new stacks-add-cqrs -n Foo.Bar.CQRS -d Menu
+% dotnet new stacks-add-cqrs -n Foo.Bar.CQRS -do Menu
 The template "Amido Stacks Web Api CQRS - Add to existing solution" was created successfully.
 ```
 
