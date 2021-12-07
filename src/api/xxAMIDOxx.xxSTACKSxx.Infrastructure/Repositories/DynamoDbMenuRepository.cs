@@ -11,20 +11,19 @@ namespace xxAMIDOxx.xxSTACKSxx.Infrastructure.Repositories
         {
         }
 
-        public async Task<Menu> GetByIdAsync(Guid id)
+        public Task<bool> DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> SaveAsync(Menu entity)
+        public Task<Menu> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public Task<bool> SaveAsync(Menu entity)
         {
             throw new NotImplementedException();
         }
     }
 }
-
