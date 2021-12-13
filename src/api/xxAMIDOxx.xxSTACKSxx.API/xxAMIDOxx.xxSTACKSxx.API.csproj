@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Amido.Stacks.API" Version="0.2.12" />
     <PackageReference Include="Amido.Stacks.API.Swagger" Version="0.2.24" />
-    <PackageReference Include="Amido.Stacks.Application.CQRS.Abstractions" Version="0.2.11" />
+    <PackageReference Include="Amido.Stacks.Application.CQRS.Abstractions" Version="0.2.15" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.17.0" />
@@ -33,9 +33,9 @@
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="5.0.1" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="6.0.0" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.2.0-rc1" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc8" />
