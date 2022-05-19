@@ -116,24 +116,6 @@ It's entirely up to you where you want to generate the WebAPI. For example your 
 The template "Amido Stacks Web Api" was created successfully.
 ```
 
-## DynamoDb Setup
-
-You need a DynamoDB instance in order to use this library. You can follow the official instructions provided by AWS [here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SettingUp.DynamoWebService.html).
-
-It should be noted that the object(s) from your application that you want to store in DynamoDB have to conform to the [Object Persistence Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKHighLevel.html).
-
-Relevant documentation pages that you can follow to set up your profile:
-
-- [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
-
-- [Named profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
-
-This library assumes you'll use the `AWS CLI` tools and will have configured your access keys via the `aws configure` command.
-
-### Amido.Stacks.DynamoDB package
-
-This template uses the [Amido.Stacks.DynamoDB](https://github.com/amido/stacks-dotnet-packages-dynamodb) package to connect and use DynamoDB.
-
 ## Creating a new WebAPI with CQRS event sourcing
 
 Let's say you want to create a brand new WebAPI with CQRS and event sourcing for your project.
@@ -303,6 +285,24 @@ Rerun the command and pass --force to accept and create.
 This will happen if the newly generated template project names collide with your existing structure. It's up to you to decide if you want to use the `--force` flag and overwrite all collisions with the projects from the template. By doing so you might lose your custom logic in some places and you'll have to transfer things manually to the new projects by examining the diffs in your source control.
 
 If you don't want to do that you can generate the new projects with a different namespace (what was shown above) and then copy/remove the things you don't need.
+
+## DynamoDB Setup
+
+You need a DynamoDB instance in order to use this library. You can follow the official instructions provided by AWS [here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SettingUp.DynamoWebService.html).
+
+It should be noted that the object(s) from your application that you want to store in DynamoDB have to conform to the [Object Persistence Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKHighLevel.html).
+
+Relevant documentation pages that you can follow to set up your profile:
+
+- [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+- [Named profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+
+This library assumes you'll use the `AWS CLI` tools and will have configured your access keys via the `aws configure` command.
+
+### Amido.Stacks.DynamoDB package
+
+This template uses the [Amido.Stacks.DynamoDB](https://github.com/amido/stacks-dotnet-packages-dynamodb) package to connect and use DynamoDB.
 
 ## Running the API locally on MacOS
 
