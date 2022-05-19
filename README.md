@@ -120,9 +120,7 @@ The template "Amido Stacks Web Api" was created successfully.
 
 You need a DynamoDB instance in order to use this library. You can follow the official instructions provided by AWS [here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SettingUp.DynamoWebService.html).
 
-Also the object(s) from your application that you want to store in DynamoDB have to conform to the [Object Persistence Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKHighLevel.html). That means your object and its fields will need to have certain attribute annotations like `[DynamoDBTable("Menu")]` etc.
-
-**IMPORTANT:** The DynamoDB table must have the same name as your Domain. If your domain is `Menu` then the table created in AWS has to have the same name.
+It should be noted that the object(s) from your application that you want to store in DynamoDB have to conform to the [Object Persistence Model](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DotNetSDKHighLevel.html).
 
 Relevant documentation pages that you can follow to set up your profile:
 
@@ -132,97 +130,9 @@ Relevant documentation pages that you can follow to set up your profile:
 
 This library assumes you'll use the `AWS CLI` tools and will have configured your access keys via the `aws configure` command.
 
-### Configuration
+### Amido.Stacks.DynamoDB package
 
-Relevant documentation pages that you can follow to set up your profile:
-
-- [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
-
-- [Named profiles](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
-
-This library assumes you'll use the `AWS CLI` tools and will have configured your access keys via the `aws configure` command.
-
-## Adding a CQRS template to your existing solution
-
-Let's say you have a WebAPI solution and you want to add CQRS functionality to it.
-
-In order for the template to generate correctly you'll need to execute it in the folder where your `.sln` file is located. Also for the purposes of this example we're assuming that in your solution the projects and namespaces have `Foo.Bar` as a prefix.
-
-```shell
-% cd src
-
-% dotnet new stacks-add-cqrs -n Foo.Bar.CQRS -do Menu
-The template "Amido Stacks Web Api CQRS - Add to existing solution" was created successfully.
-```
-
-If all is well, in the output you'll see that projects are being added as references to your `.sln` file. The list of projects that you'll get by installing this template are as follows (please note the prefix provided with the `-n` flag from above):
-
-- Foo.Bar.CQRS.Infrastructure
-- Foo.Bar.CQRS.API
-- Foo.Bar.CQRS.API.Models
-- Foo.Bar.CQRS.Application.CommandHandlers
-- Foo.Bar.CQRS.Application.Integration
-- Foo.Bar.CQRS.Application.QueryHandlers
-- Foo.Bar.CQRS.Domain
-- Foo.Bar.CQRS.Common
-- Foo.Bar.CQRS.CQRS
-- Foo.Bar.CQRS.Common.UnitTests
-- Foo.Bar.CQRS.CQRS.UnitTests
-- Foo.Bar.CQRS.Domain.UnitTests
-- Foo.Bar.CQRS.Infrastructure.IntegrationTests
-
-As you see you get a new `Foo.Bar.CQRS.API` folder which has controllers wired up with the CQRS command handlers. If you had provided `-n Foo.Bar` as your name in the command above you would get an error stating the following:
-
-```shell
-Creating this template will make changes to existing files:
-  Overwrite   ./Foo.Bar.API.Models/Requests/CreateCategoryRequest.cs
-  Overwrite   ./Foo.Bar.API.Models/Requests/CreateItemRequest.cs
-  Overwrite   ./Foo.Bar.API.Models/Requests/CreateCarRequest.cs
-  Overwrite   ./Foo.Bar.API.Models/Requests/UpdateCategoryRequest.cs
-  Overwrite   ./Foo.Bar.API.Models/Requests/UpdateItemRequest.cs
-  Overwrite   ./Foo.Bar.API.Models/Requests/UpdateCarRequest.cs
-  Overwrite   ./Foo.Bar.API.Models/Responses/Category.cs
-  Overwrite   ./Foo.Bar.API.Models/Responses/Item.cs
-  Overwrite   ./Foo.Bar.API.Models/Responses/Car.cs
-  Overwrite   ./Foo.Bar.API.Models/Responses/ResourceCreatedResponse.cs
-  Overwrite   ./Foo.Bar.API.Models/Responses/SearchCarResponse.cs
-  Overwrite   ./Foo.Bar.API.Models/Responses/SearchCarResponseItem.cs
-  Overwrite   ./Foo.Bar.API.Models/Foo.Bar.API.Models.csproj
-  Overwrite   ./Foo.Bar.API/appsettings.json
-  Overwrite   ./Foo.Bar.API/Authentication/ConfigurationExtensions.cs
-  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationConfiguration.cs
-  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationConfigurationExtensions.cs
-  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationOperationFilter.cs
-  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationStartupExtensions.cs
-  Overwrite   ./Foo.Bar.API/Authentication/OpenApiJwtBearerAuthenticationConfiguration.cs
-  Overwrite   ./Foo.Bar.API/Authentication/OpenApiSecurityDefinitions.cs
-  Overwrite   ./Foo.Bar.API/Authentication/StubJwtBearerAuthenticationHttpMessageHandler.cs
-  Overwrite   ./Foo.Bar.API/Authentication/SwaggerGenOptionsExtensions.cs
-  Overwrite   ./Foo.Bar.API/Authorization/ConfigurableAuthorizationPolicyProvider.cs
-  Overwrite   ./Foo.Bar.API/Constants.cs
-  Overwrite   ./Foo.Bar.API/Controllers/ApiControllerBase.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Category/AddCarCategoryController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Category/DeleteCategoryController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Category/UpdateCarCategoryController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Item/AddCarItemController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Item/DeleteCarItemController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Item/UpdateCarItemController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Car/CreateCarController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Car/DeleteCarController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Car/GetCarByIdController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Car/GetCarByIdV2Controller.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Car/SearchCarController.cs
-  Overwrite   ./Foo.Bar.API/Controllers/Car/UpdateCarController.cs
-  Overwrite   ./Foo.Bar.API/Program.cs
-  Overwrite   ./Foo.Bar.API/Startup.cs
-  Overwrite   ./Foo.Bar.API/Foo.Bar.API.csproj
-
-Rerun the command and pass --force to accept and create.
-```
-
-This will happen if the newly generated template project names collide with your existing structure. It's up to you to decide if you want to use the `--force` flag and overwrite all collisions with the projects from the template. By doing so you might lose your custom logic in some places and you'll have to transfer things manually to the new projects by examining the diffs in your source control.
-
-If you don't want to do that you can generate the new projects with a different namespace (what was shown above) and then copy/remove the things you don't need.
+This template uses the [Amido.Stacks.DynamoDB](https://github.com/amido/stacks-dotnet-packages-dynamodb) package to connect and use DynamoDB.
 
 ## Creating a new WebAPI with CQRS event sourcing
 
@@ -312,6 +222,88 @@ drwxr-xr-x  3 amido  staff    96 23 Aug 15:58 ..
 
 Now both `Foo.Bar.Worker` and `Foo.Bar.Worker.UnitTests` projects are part of your `Foo.Bar` solution.
 
+## Adding a CQRS template to your existing solution
+
+Let's say you have a WebAPI solution and you want to add CQRS functionality to it.
+
+In order for the template to generate correctly you'll need to execute it in the folder where your `.sln` file is located. Also for the purposes of this example we're assuming that in your solution the projects and namespaces have `Foo.Bar` as a prefix.
+
+```shell
+% cd src
+
+% dotnet new stacks-add-cqrs -n Foo.Bar.CQRS -do Menu
+The template "Amido Stacks Web Api CQRS - Add to existing solution" was created successfully.
+```
+
+If all is well, in the output you'll see that projects are being added as references to your `.sln` file. The list of projects that you'll get by installing this template are as follows (please note the prefix provided with the `-n` flag from above):
+
+- Foo.Bar.CQRS.Infrastructure
+- Foo.Bar.CQRS.API
+- Foo.Bar.CQRS.API.Models
+- Foo.Bar.CQRS.Application.CommandHandlers
+- Foo.Bar.CQRS.Application.Integration
+- Foo.Bar.CQRS.Application.QueryHandlers
+- Foo.Bar.CQRS.Domain
+- Foo.Bar.CQRS.Common
+- Foo.Bar.CQRS.CQRS
+- Foo.Bar.CQRS.Common.UnitTests
+- Foo.Bar.CQRS.CQRS.UnitTests
+- Foo.Bar.CQRS.Domain.UnitTests
+- Foo.Bar.CQRS.Infrastructure.IntegrationTests
+
+As you see you get a new `Foo.Bar.CQRS.API` folder which has controllers wired up with the CQRS command handlers. If you had provided `-n Foo.Bar` as your name in the command above you would get an error stating the following:
+
+```shell
+Creating this template will make changes to existing files:
+  Overwrite   ./Foo.Bar.API.Models/Requests/CreateCategoryRequest.cs
+  Overwrite   ./Foo.Bar.API.Models/Requests/CreateItemRequest.cs
+  Overwrite   ./Foo.Bar.API.Models/Requests/CreateCarRequest.cs
+  Overwrite   ./Foo.Bar.API.Models/Requests/UpdateCategoryRequest.cs
+  Overwrite   ./Foo.Bar.API.Models/Requests/UpdateItemRequest.cs
+  Overwrite   ./Foo.Bar.API.Models/Requests/UpdateCarRequest.cs
+  Overwrite   ./Foo.Bar.API.Models/Responses/Category.cs
+  Overwrite   ./Foo.Bar.API.Models/Responses/Item.cs
+  Overwrite   ./Foo.Bar.API.Models/Responses/Car.cs
+  Overwrite   ./Foo.Bar.API.Models/Responses/ResourceCreatedResponse.cs
+  Overwrite   ./Foo.Bar.API.Models/Responses/SearchCarResponse.cs
+  Overwrite   ./Foo.Bar.API.Models/Responses/SearchCarResponseItem.cs
+  Overwrite   ./Foo.Bar.API.Models/Foo.Bar.API.Models.csproj
+  Overwrite   ./Foo.Bar.API/appsettings.json
+  Overwrite   ./Foo.Bar.API/Authentication/ConfigurationExtensions.cs
+  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationConfiguration.cs
+  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationConfigurationExtensions.cs
+  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationOperationFilter.cs
+  Overwrite   ./Foo.Bar.API/Authentication/JwtBearerAuthenticationStartupExtensions.cs
+  Overwrite   ./Foo.Bar.API/Authentication/OpenApiJwtBearerAuthenticationConfiguration.cs
+  Overwrite   ./Foo.Bar.API/Authentication/OpenApiSecurityDefinitions.cs
+  Overwrite   ./Foo.Bar.API/Authentication/StubJwtBearerAuthenticationHttpMessageHandler.cs
+  Overwrite   ./Foo.Bar.API/Authentication/SwaggerGenOptionsExtensions.cs
+  Overwrite   ./Foo.Bar.API/Authorization/ConfigurableAuthorizationPolicyProvider.cs
+  Overwrite   ./Foo.Bar.API/Constants.cs
+  Overwrite   ./Foo.Bar.API/Controllers/ApiControllerBase.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Category/AddCarCategoryController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Category/DeleteCategoryController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Category/UpdateCarCategoryController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Item/AddCarItemController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Item/DeleteCarItemController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Item/UpdateCarItemController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Car/CreateCarController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Car/DeleteCarController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Car/GetCarByIdController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Car/GetCarByIdV2Controller.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Car/SearchCarController.cs
+  Overwrite   ./Foo.Bar.API/Controllers/Car/UpdateCarController.cs
+  Overwrite   ./Foo.Bar.API/Program.cs
+  Overwrite   ./Foo.Bar.API/Startup.cs
+  Overwrite   ./Foo.Bar.API/Foo.Bar.API.csproj
+
+Rerun the command and pass --force to accept and create.
+```
+
+This will happen if the newly generated template project names collide with your existing structure. It's up to you to decide if you want to use the `--force` flag and overwrite all collisions with the projects from the template. By doing so you might lose your custom logic in some places and you'll have to transfer things manually to the new projects by examining the diffs in your source control.
+
+If you don't want to do that you can generate the new projects with a different namespace (what was shown above) and then copy/remove the things you don't need.
+
 ## Running the API locally on MacOS
 
 To run the API locally on MacOS there are a couple of prerequisites that you have to be aware of. You'll need a CosmosDB emulator/instance or an instance of DynamoDB on AWS. You also might need access to Azure/AWS for Azure Service Bus, Azure Event Hubs or AWS SNS.
@@ -389,7 +381,7 @@ Now that you have your CosmosDB all set, you can point the API project to it. In
         }
 }
 "AWS": {
-    "Region": "eu-west-2" 
+    "Region": "eu-west-2"
 }
 ```
 
