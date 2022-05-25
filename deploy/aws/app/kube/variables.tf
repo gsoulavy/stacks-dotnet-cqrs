@@ -1,4 +1,32 @@
 ############################################
+# Image Repositories
+############################################
+variable "docker_image_name" {
+  description = "Main docker image."
+  type        = string
+}
+
+variable "docker_image_name_bg_worker" {
+  description = "BG Worker docker image name."
+  type        = string
+}
+
+variable "docker_image_name_worker" {
+  description = "K8S Worker docker image name."
+  type        = string
+}
+
+variable "docker_image_name_asb_listener" {
+  description = "ASB Listener docker image name."
+  type        = string
+}
+
+variable "docker_image_name_aeh_listener" {
+  description = "ASB Listener docker image name."
+  type        = string
+}
+
+############################################
 # NAMING
 ############################################
 variable "name_company" {
@@ -10,7 +38,6 @@ variable "name_project" {
   description = "ID element. Usually used to indicate specific project."
   type        = string
 }
-
 
 variable "name_domain" {
   description = "ID element. Usually used to indicate specific API."
@@ -28,10 +55,26 @@ variable "attributes" {
 }
 
 variable "tags" {
-
   description = "Meta data for labelling the infrastructure."
   type        = map(string)
   default     = {}
+}
+
+variable "env" {
+  description = "The name of the environment."
+  default     = "nonprod"
+  type        = string
+}
+
+variable "owner" {
+  description = "Responsible parties for this component."
+  type        = string
+}
+
+variable "region" {
+  description = "AWS Region for this infrastructure."
+  type        = string
+  default     = "eu-west-2"
 }
 
 # Each region must have corresponding a shortend name for resource naming purposes
@@ -61,16 +104,28 @@ variable "location_name_map" {
   }
 }
 
-variable "resource_group_location" {
-  description = "AWS region-code corresponding to aws infrastrcuture deployed, example for london it should be eu-west-2."
+###############################################
+# Messaging
+###############################################
+
+variable "app_bus_type" {
+  description = "Which app bus to use."
   type        = string
+  nullable    = true
+  validation {
+    condition = anytrue([
+      var.app_bus_type == "servicebus",
+      var.app_bus_type == "eventhub",
+      var.app_bus_type == "sqs",
+      var.app_bus_type == "sns",
+      var.app_bus_type == null
+    ])
+    error_message = "App_bus_type must be null, servicebus, eventhub, sqs, or sns."
+  }
 }
 
-###############################################
-# SQS
-###############################################
 variable "enable_queue" {
-  description = "Whether to create SQS queue."
+  description = "Whether to create SQS queue. Must match app_bus_type above."
   type        = bool
 }
 
@@ -105,5 +160,5 @@ variable "attribute_name" {
 
 variable "attribute_type" {
   description = "Type of the attribute, which must be a scalar type: S, N, or B for (S)tring, (N)umber or (B)inary data."
-  type        = any
+  type        = string
 }
