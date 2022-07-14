@@ -5,8 +5,8 @@ on:
     paths:
       - 'build/github/**'
       - 'src/**'
-      - 'deploy/aws/**' # TODO: Review this as new cloud provider targets are used
-      - 'deploy/k8s/aws/**'  # TODO: Review this as new cloud provider targets are used
+      - 'deploy/aws/**' # TODO: Review this as new cloud provider targets are used.
+      - 'deploy/k8s/aws/**'  # TODO: Review this as new cloud provider targets are used.
       - '.github/workflows/ci.yml'
   pull_request:
     branches:
@@ -53,7 +53,7 @@ env:
   FUNCTIONAL_TESTS_ARTEFACT_NAME: tests
   SONAR_PROJECT_NAME: "dotnet-api-cqrs"
   # Events Function/s Config
-  APP_BUS_TYPE: 'sqs' # Supports sqs, sns, servicebus, eventhub
+  APP_BUS_TYPE: 'sns' # Supports sns, servicebus, and eventhub.
   # Worker & Listener Image Naming (only implemented for ServiceBus and EventHub Messaging)
   DOCKER_IMAGE_NAME_BG_WORKER: "stacks-api-events-bg-worker"
   DOCKER_IMAGE_ARGS_BG_WORKER: "src/worker"
@@ -152,13 +152,13 @@ jobs:
           TF_VAR_docker_image_name_bg_worker: ${{ env.DOCKER_IMAGE_NAME_BG_WORKER }}
           TF_VAR_docker_image_name_asb_listener: ${{ env.DOCKER_IMAGE_NAME_ASB_LISTENER }}
           TF_VAR_docker_image_name_aeh_listener: ${{ env.DOCKER_IMAGE_NAME_AEH_LISTENER }}
-          # Dynamo-DB Configuration
+          # CQRS Configuration
           TF_VAR_enable_dynamodb: true
           TF_VAR_table_name: "menu"
           TF_VAR_hash_key: "ID"
           TF_VAR_attribute_name: "ID"
           TF_VAR_attribute_type: "S"
-          # SQS Configuration (controlled by APP_BUS_TYPE)
+          # Events Configuration (controlled by APP_BUS_TYPE)
           TF_VAR_app_bus_type: ${{ env.APP_BUS_TYPE }}
           TF_VAR_enable_queue: true
           TF_VAR_queue_name: "menu"

@@ -12,31 +12,16 @@ module "app_label" {
 
 module "app" {
 
-  source = "git::https://github.com/amido/stacks-terraform//aws/modules/infrastructure_modules/stacks_app"
+  source = "git::https://github.com/amido/stacks-terraform//aws/modules/infrastructure_modules/stacks_app?ref=master"
 
   enable_dynamodb = var.enable_dynamodb
   table_name      = "${module.app_label.id}-${var.table_name}"
   hash_key        = var.hash_key
   attribute_name  = var.attribute_name
   attribute_type  = var.attribute_type
-  enable_queue    = contains(split(",", var.app_bus_type), "sqs") ? var.enable_queue : false
+  enable_queue    = contains(split(",", var.app_bus_type), "sns") ? var.enable_queue : false
   queue_name      = "${module.app_label.id}-${var.queue_name}"
   tags            = module.app_label.tags
-}
-
-################
-# SNS (TODO: Tactical - migrate to app module)
-###############
-resource "aws_sns_topic" "main" {
-  count = var.enable_queue ? 1 : 0
-  name  = "${module.app_label.id}-${var.queue_name}"
-}
-
-resource "aws_sns_topic_subscription" "main" {
-  count     = var.enable_queue ? 1 : 0
-  topic_arn = aws_sns_topic.main[0].arn
-  protocol  = "sqs"
-  endpoint  = var.enable_queue ? module.app.sqs_queue_arn[0] : null
 }
 
 ################
